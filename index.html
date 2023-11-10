@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Practica DOM: Juego X-O</title>
+</head>
+<body>
+  <h1>Juego X-O</h1>
+  <table id="data"></table>
+  <table>
+    <tr>
+      <td>X:</td>
+      <td id="Xacc"></td>
+    </tr>
+    <tr>
+      <td>O:</td>
+      <td id="Oacc"></td>
+    </tr>
+  </table>
+  <script>
+    // Recogida de datos
+    let rows, columns;
+    do{
+      rows = parseInt(prompt('Filas: '));
+      columns = parseInt(prompt('Columnas: '));
+    }while((isNaN(rows) || isNaN(columns)) || (rows <= 0 || columns <= 0))
+    // Rellenar tabla
+    const table = document.querySelector('table');
+    for (let i = 0; i < rows; i++) {
+      const tr = document.createElement('tr');
+      table.append(tr);
+      for (let j = 0; j < columns; j++) {
+        const td = document.createElement('td');
+        td.textContent = Math.floor((Math.random()*2)) ? 'O':'X';
+        td.setAttribute('onclick','change(this)');
+        tr.append(td);
+      }
+    }
+    // Funciones
+    function count() {
+      let elements = document.querySelectorAll('#data td');
+      let numX = 0, numO = 0;
+      elements.forEach(td => {
+        if (td.textContent == 'X') numX++;
+        else numO++;
+      });
+      document.getElementById('Xacc').textContent = numX;
+      document.getElementById('Oacc').textContent = numO;
+    }
+    function change(cell) {
+      cell.textContent = cell.textContent == 'X' ? 'O':'X'; // Switching
+      // Remove()
+      const tr = cell.parentElement; // Row
+      const tds = [...tr.children]; // all cells in the row
+      const index = tds.indexOf(cell);
+      const column = document.querySelectorAll(`#data td:nth-child(${index+1})`);
+      console.log(column);
+      if([...column].every(td => td.textContent == cell.textContent)) { // Columns
+        [...column].forEach(td => td.remove());
+      }
+      if(tds.every(td => td.textContent == tds[0].textContent)) tr.remove(); // Rows
+      count();
+    }
+  </script>
+</body>
+</html>

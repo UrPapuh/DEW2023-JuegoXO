@@ -1,0 +1,19 @@
+{
+  "name": "dew2023-juegoxo",
+  "version": "1.0.0",
+  "description": "Juego XO",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UrPapuh/DEW2023-JuegoXO.git"
+  },
+  "author": "UrPapuh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/UrPapuh/DEW2023-JuegoXO/issues"
+  },
+  "homepage": "https://github.com/UrPapuh/DEW2023-JuegoXO#readme"
+}
